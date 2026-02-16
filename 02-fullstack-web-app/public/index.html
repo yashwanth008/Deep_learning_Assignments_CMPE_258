@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Todo List | Pixiee</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.6s ease;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .app-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.6s ease;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .stat-card p {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .input-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .todo-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .todo-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .category-select {
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 1em;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .add-btn {
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .add-btn:active {
+            transform: translateY(0);
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: transparent;
+        }
+
+        .filter-btn:hover {
+            border-color: #667eea;
+        }
+
+        .todo-list {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .todo-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .todo-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .todo-list::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+
+        .todo-item {
+            background: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            animation: slideIn 0.3s ease;
+        }
+
+        .todo-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .todo-item.completed {
+            opacity: 0.6;
+            background: #e8f5e9;
+        }
+
+        .todo-item.work { border-left-color: #f44336; }
+        .todo-item.personal { border-left-color: #2196f3; }
+        .todo-item.shopping { border-left-color: #4caf50; }
+        .todo-item.health { border-left-color: #ff9800; }
+
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .todo-content {
+            flex: 1;
+        }
+
+        .todo-text {
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .todo-text.completed {
+            text-decoration: line-through;
+        }
+
+        .todo-meta {
+            display: flex;
+            gap: 10px;
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .category-badge {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+        }
+
+        .delete-btn {
+            padding: 8px 16px;
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .delete-btn:hover {
+            background: #d32f2f;
+            transform: scale(1.05);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state svg {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .ai-suggestion {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 2px dashed #667eea;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .ai-suggestion h4 {
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        function App() {
+            const [todos, setTodos] = useState([]);
+            const [inputValue, setInputValue] = useState('');
+            const [category, setCategory] = useState('personal');
+            const [filter, setFilter] = useState('all');
+            const [aiSuggestion, setAiSuggestion] = useState('');
+
+            // Load todos from localStorage on mount
+            useEffect(() => {
+                const savedTodos = localStorage.getItem('todos');
+                if (savedTodos) {
+                    setTodos(JSON.parse(savedTodos));
+                }
+            }, []);
+
+            // Save todos to localStorage whenever they change
+            useEffect(() => {
+                localStorage.setItem('todos', JSON.stringify(todos));
+            }, [todos]);
+
+            // AI-powered suggestion system
+            useEffect(() => {
+                const suggestions = [
+                    "💡 Tip: Break large tasks into smaller, manageable steps!",
+                    "🎯 Focus on completing 3 important tasks today for maximum productivity.",
+                    "⏰ Set specific time blocks for your tasks to stay on track.",
+                    "🌟 Prioritize tasks that align with your long-term goals.",
+                    "💪 Start with the most challenging task when your energy is highest.",
+                ];
+                
+                const randomSuggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+                setAiSuggestion(randomSuggestion);
+                
+                const interval = setInterval(() => {
+                    const newSuggestion = suggestions[Math.floor(Math.random() * suggestions.length)];
+                    setAiSuggestion(newSuggestion);
+                }, 30000); // Change suggestion every 30 seconds
+                
+                return () => clearInterval(interval);
+            }, []);
+
+            const addTodo = () => {
+                if (inputValue.trim()) {
+                    const newTodo = {
+                        id: Date.now(),
+                        text: inputValue,
+                        completed: false,
+                        category: category,
+                        createdAt: new Date().toISOString()
+                    };
+                    setTodos([newTodo, ...todos]);
+                    setInputValue('');
+                }
+            };
+
+            const toggleTodo = (id) => {
+                setTodos(todos.map(todo =>
+                    todo.id === id ? { ...todo, completed: !todo.completed } : todo
+                ));
+            };
+
+            const deleteTodo = (id) => {
+                setTodos(todos.filter(todo => todo.id !== id));
+            };
+
+            const getFilteredTodos = () => {
+                switch(filter) {
+                    case 'active':
+                        return todos.filter(todo => !todo.completed);
+                    case 'completed':
+                        return todos.filter(todo => todo.completed);
+                    case 'work':
+                    case 'personal':
+                    case 'shopping':
+                    case 'health':
+                        return todos.filter(todo => todo.category === filter);
+                    default:
+                        return todos;
+                }
+            };
+
+            const stats = {
+                total: todos.length,
+                active: todos.filter(t => !t.completed).length,
+                completed: todos.filter(t => t.completed).length
+            };
+
+            return (
+                <div className="container">
+                    <div className="header">
+                        <h1>✨ Pixiee Todo</h1>
+                        <p>AI-Powered Task Management</p>
+                    </div>
+
+                    <div className="app-card">
+                        <div className="stats">
+                            <div className="stat-card">
+                                <h3>{stats.total}</h3>
+                                <p>Total Tasks</p>
+                            </div>
+                            <div className="stat-card">
+                                <h3>{stats.active}</h3>
+                                <p>Active</p>
+                            </div>
+                            <div className="stat-card">
+                                <h3>{stats.completed}</h3>
+                                <p>Completed</p>
+                            </div>
+                        </div>
+
+                        {aiSuggestion && (
+                            <div className="ai-suggestion">
+                                <h4>🤖 AI Suggestion</h4>
+                                <p>{aiSuggestion}</p>
+                            </div>
+                        )}
+
+                        <div className="input-section">
+                            <input
+                                type="text"
+                                className="todo-input"
+                                placeholder="What needs to be done?"
+                                value={inputValue}
+                                onChange={(e) => setInputValue(e.target.value)}
+                                onKeyPress={(e) => e.key === 'Enter' && addTodo()}
+                            />
+                            <select
+                                className="category-select"
+                                value={category}
+                                onChange={(e) => setCategory(e.target.value)}
+                            >
+                                <option value="personal">Personal</option>
+                                <option value="work">Work</option>
+                                <option value="shopping">Shopping</option>
+                                <option value="health">Health</option>
+                            </select>
+                            <button className="add-btn" onClick={addTodo}>
+                                Add Task
+                            </button>
+                        </div>
+
+                        <div className="filters">
+                            {['all', 'active', 'completed', 'work', 'personal', 'shopping', 'health'].map(f => (
+                                <button
+                                    key={f}
+                                    className={`filter-btn ${filter === f ? 'active' : ''}`}
+                                    onClick={() => setFilter(f)}
+                                >
+                                    {f.charAt(0).toUpperCase() + f.slice(1)}
+                                </button>
+                            ))}
+                        </div>
+
+                        <div className="todo-list">
+                            {getFilteredTodos().length === 0 ? (
+                                <div className="empty-state">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M9 2h6a2 2 0 012 2v16a2 2 0 01-2 2H9a2 2 0 01-2-2V4a2 2 0 012-2zm0 2v16h6V4H9z"/>
+                                    </svg>
+                                    <h3>No tasks yet!</h3>
+                                    <p>Add your first task to get started</p>
+                                </div>
+                            ) : (
+                                getFilteredTodos().map(todo => (
+                                    <div
+                                        key={todo.id}
+                                        className={`todo-item ${todo.category} ${todo.completed ? 'completed' : ''}`}
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            className="checkbox"
+                                            checked={todo.completed}
+                                            onChange={() => toggleTodo(todo.id)}
+                                        />
+                                        <div className="todo-content">
+                                            <div className={`todo-text ${todo.completed ? 'completed' : ''}`}>
+                                                {todo.text}
+                                            </div>
+                                            <div className="todo-meta">
+                                                <span className="category-badge">
+                                                    {todo.category}
+                                                </span>
+                                                <span>
+                                                    {new Date(todo.createdAt).toLocaleDateString()}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <button
+                                            className="delete-btn"
+                                            onClick={() => deleteTodo(todo.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
