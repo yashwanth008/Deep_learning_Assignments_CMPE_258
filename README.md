@@ -9,12 +9,12 @@
 
 | # | Notebook | Topics | Video |
 |---|----------|--------|-------|
-| 1 | [Activation Functions](#1-activation-functions-for-deep-learning) | Sigmoid, ReLU, GELU, Swish, Mish | [▶ Watch](#1-activation-functions-for-deep-learning) |
-| 2 | [CNN Fundamentals](#2-convolutional-neural-networks-fundamentals) | Conv layers, Pooling, Architectures, Visualization | [▶ Watch](#2-convolutional-neural-networks-fundamentals) |
-| 3 | [Hyperparameter Tuning](#3-hyperparameter-tuning-for-deep-learning) | Grid Search, Random Search, Bayesian Opt, Optuna | [▶ Watch](#3-hyperparameter-tuning-for-deep-learning) |
-| 4 | [Classification Metrics](#4-classification-metrics--fundamentals) | Confusion Matrix, Precision, Recall, F1, ROC-AUC | [▶ Watch](#4-classification-metrics--fundamentals) |
-| 5 | [Modern CNN Architectures](#5-modern-cnn-architectures--transfer-learning) | ResNet, EfficientNet, Transfer Learning | [▶ Watch](#5-modern-cnn-architectures--transfer-learning) |
-| 6 | [Optimizers for Deep Learning](#6-optimizers-for-deep-learning) | SGD, Momentum, Adam, AdamW, LR Schedules | [▶ Watch](#6-optimizers-for-deep-learning) |
+| 1 | [Activation Functions](#1-activation-functions-for-deep-learning) | Sigmoid, ReLU, GELU, Swish, Mish | [▶ Watch](https://drive.google.com/file/d/12-PMbb0uV2npDB2n37ZYQcO889uRjEDB/view?usp=sharing) |
+| 2 | [CNN Fundamentals](#2-convolutional-neural-networks-fundamentals) | Conv layers, Pooling, Architectures, Visualization | [▶ Watch](https://drive.google.com/file/d/1N00MOt7_qwtHzT5e-AuDb2Y5-LLy9Q1N/view?usp=sharing) |
+| 3 | [Hyperparameter Tuning](#3-hyperparameter-tuning-for-deep-learning) | Grid Search, Random Search, Bayesian Opt, Optuna | [▶ Watch](https://drive.google.com/file/d/1iurxrc5TD97q0sByQbRJ8CqRatRTzw6R/view?usp=sharing) |
+| 4 | [Classification Metrics](#4-classification-metrics--fundamentals) | Confusion Matrix, Precision, Recall, F1, ROC-AUC | [▶ Watch](https://drive.google.com/file/d/1yAQue_yeKUg2jXwNARcNlgvu3iZN07tB/view?usp=sharing) |
+| 5 | [Modern CNN Architectures](#5-modern-cnn-architectures--transfer-learning) | ResNet, EfficientNet, Transfer Learning | [▶ Watch](https://drive.google.com/file/d/1mfLQPjrAfx-TBeztV37NBnq9wWA5mz5_/view?usp=sharing) |
+| 6 | [Optimizers for Deep Learning](#6-optimizers-for-deep-learning) | SGD, Momentum, Adam, AdamW, LR Schedules | [▶ Watch](https://drive.google.com/file/d/1kwR48gxykPCd7CIgYVCT80bDY1i00fdc/view?usp=sharing) |
 
 ---
 
