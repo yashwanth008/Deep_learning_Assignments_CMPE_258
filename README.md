@@ -9,10 +9,10 @@
 
 | # | Notebook | Topics | Video |
 |---|----------|--------|-------|
-| 1 | [RNN, LSTM, GRU & WaveNet](#1-sequence-models-rnn--lstm--gru--wavenet) | Vanilla RNN, LSTM gates, GRU, Dilated Convolutions | [▶ Watch](YOUR_VIDEO_LINK_1) |
-| 2 | [10 Years of NLP](#2-10-years-of-deep-learning-in-nlp) | Word2Vec, Seq2Seq, Attention, Transformers, BERT, GPT, RLHF | [▶ Watch](YOUR_VIDEO_LINK_2) |
-| 3 | [Vision Transformers](#3-vision-transformers--the-frontier-of-computer-vision) | ViT, CLIP, DINOv2, SAM, Hybrid Architectures | [▶ Watch](YOUR_VIDEO_LINK_3) |
-| 4 | [GNN Fundamentals](#4-graph-neural-networks-fundamentals) | Graphs, Message Passing, GCN from Scratch, Node Classification | [▶ Watch](YOUR_VIDEO_LINK_4) |
+| 1 | [RNN, LSTM, GRU & WaveNet](#1-sequence-models-rnn--lstm--gru--wavenet) | Vanilla RNN, LSTM gates, GRU, Dilated Convolutions | [▶ Watch](https://drive.google.com/file/d/1pYgPAlNYXPReK2WV5463VbA5-7YE2S_e/view?usp=sharing) |
+| 2 | [10 Years of NLP](#2-10-years-of-deep-learning-in-nlp) | Word2Vec, Seq2Seq, Attention, Transformers, BERT, GPT, RLHF | [▶ Watch](https://drive.google.com/file/d/1NeLZ-D8dia9j3-Jwaj4FcZ8dEhQYoltw/view?usp=sharing) |
+| 3 | [Vision Transformers](#3-vision-transformers--the-frontier-of-computer-vision) | ViT, CLIP, DINOv2, SAM, Hybrid Architectures | [▶ Watch](https://drive.google.com/file/d/1Bw3jwVIZAD0KZXgf6wGT68BSXx4DF94B/view?usp=sharing) |
+| 4 | [GNN Fundamentals](#4-graph-neural-networks-fundamentals) | Graphs, Message Passing, GCN from Scratch, Node Classification | [▶ Watch](https://drive.google.com/file/d/13vShUtbyKB81sJOqDUmRtRicGm_1dpP-/view?usp=sharing) |
 
 ---
 
